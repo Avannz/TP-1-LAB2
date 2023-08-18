@@ -14,23 +14,30 @@ void mostrarArregloC (char arreglo[], int validos);
 void cargarMatriz(int matriz[f][c]);
 void mostrarMatriz(int matriz[f][c]);
 void invertirArreglo (char arreglo[], int validos);
+void cargarArregloMes (int matriz[f][c], int arreglo[], int dim);
+void intercambiar(int *var1, int *var2);
 int cargarArreglo(int arreglo[], int dim);
 int sumarArreglo(int arreglo[], int dim);
 int cantidadArreglo (int arreglo[], int dim);
 int cargarArregloC(char arreglo[], int dim);
 int pasarEntero (int arreglo[], int dim);
 float promedioArreglo(int arreglo[], int dim);
-int mayorPre (int matriz[f][c]);
+int mayorPre (int matriz[f][c], int mes);
+int capicua(char arreglo[], int validos);
 
 int main()
 {
 
     int arreglo[5];
+    int arregloMes[12];
     char arregloC[5];
     int arregloEntero[5];
     int matriz[f][c];
 
     int validos;
+    int mes;
+    int flag = 0;
+    int valor1, valor2;
 
     /*llenarArreglo(arreglo, 5);
     mostrarArreglo(arreglo, 5);
@@ -69,12 +76,52 @@ int main()
     printf("\n\n %d", suma);
 
     system("pause");
-    system("cls");*/
+    system("cls");
+
 
     cargarMatriz(matriz);
     mostrarMatriz(matriz);
 
-    mayorPre(matriz);
+    printf("\n\nIngrese el mes: ");
+    fflush(stdin);
+    scanf("%d", &mes);
+
+    int posMayor = mayorPre(matriz, mes);
+    printf("\nEl dia con mayor precipitacion es el: %d", posMayor);
+
+    printf("\n\n");
+
+    cargarArregloMes(matriz, arregloMes, 12);
+
+    validos = cargarArregloC(arregloC, 5);
+
+    mostrarArregloC(arregloC, validos);
+
+    flag = capicua(arregloC, validos);
+
+    if(flag == 1)
+    {
+
+        printf("Es capicua");
+
+    }
+    else if(flag == 0)
+    {
+
+        printf("No es capicua");
+    }*/
+
+    printf("Ingresa un valor: ");
+    fflush(stdin);
+    scanf("%d", &valor1);
+
+    printf("Ingresa un valor: ");
+    fflush(stdin);
+    scanf("%d", &valor2);
+
+    intercambiar(&valor1, &valor2);
+
+    printf("\n %d y %d", valor1, valor2);
 
 }
 
@@ -310,25 +357,20 @@ void mostrarMatriz(int matriz[f][c])
         for(j = 0; j < c; j++)
         {
 
-            printf(" %d", matriz[i][j]);
+            printf(" %3d", matriz[i][j]);
 
         }
     }
 
 }
 
-int mayorPre (int matriz[f][c])
+int mayorPre (int matriz[f][c], int mes)
 {
 
     int i,j;
     int numMayor = 0;
     int posMayor = 0;
     int num;
-    int mes = 0;
-
-    printf("\nIngrese el mes: ");
-    fflush(stdin);
-    scanf("%d", &mes);
 
     for(i = mes; i <= mes; i++)
     {
@@ -347,8 +389,67 @@ int mayorPre (int matriz[f][c])
 
             }
         }
-
-        printf("Numero mayor: %d", posMayor);
     }
+    return posMayor;
 }
 
+void cargarArregloMes (int matriz[f][c], int arreglo[], int dim)
+{
+
+    int i = 0;
+    int presXdia = 0;
+
+    while(i < dim)
+    {
+
+        presXdia = mayorPre(matriz, i);
+        arreglo[i] = presXdia;
+        i++;
+
+    }
+
+    mostrarArreglo(arreglo, dim);
+}
+
+int capicua(char arreglo[], int validos)
+{
+
+    int i = 0;
+    int j = validos-1;
+    int flag = 1;
+
+    while(j > i)
+    {
+
+        if(arreglo[i] != arreglo[j])
+        {
+            flag = 0;
+            break;
+        }
+        else
+        {
+            i++;
+            j--;
+        }
+
+    }
+    return flag;
+}
+
+void intercambiar(int *var1, int *var2)
+{
+
+    int aux;
+
+    printf("Ingresa el valor nuevo para var1: ");
+    fflush(stdin);
+    scanf("%d", &aux);
+
+    *var1 = aux;
+
+    printf("Ingresa el valor nuevo para var2: ");
+    fflush(stdin);
+    scanf("%d", &aux);
+
+    *var2 = aux;
+}
