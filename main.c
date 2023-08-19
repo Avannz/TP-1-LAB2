@@ -16,25 +16,29 @@ void mostrarMatriz(int matriz[f][c]);
 void invertirArreglo (char arreglo[], int validos);
 void cargarArregloMes (int matriz[f][c], int arreglo[], int dim);
 void intercambiar(int *var1, int *var2);
+void ordenarArreglo(int arreglo[], int validos);
+void intercalar (int arreglo1[], int arreglo2[], int arreglo3[], int validos);
 int cargarArreglo(int arreglo[], int dim);
 int sumarArreglo(int arreglo[], int dim);
 int cantidadArreglo (int arreglo[], int dim);
 int cargarArregloC(char arreglo[], int dim);
 int pasarEntero (int arreglo[], int dim);
-float promedioArreglo(int arreglo[], int dim);
 int mayorPre (int matriz[f][c], int mes);
 int capicua(char arreglo[], int validos);
+int posicionMenor (int arreglo[], int posIni, int validos);
+float promedioArreglo(int arreglo[], int dim);
 
 int main()
 {
 
     int arreglo[5];
     int arregloMes[12];
-    char arregloC[5];
     int arregloEntero[5];
     int matriz[f][c];
+    char arregloC[5];
 
     int validos;
+    int validos2;
     int mes;
     int flag = 0;
     int valor1, valor2;
@@ -109,7 +113,7 @@ int main()
     {
 
         printf("No es capicua");
-    }*/
+    }
 
     printf("Ingresa un valor: ");
     fflush(stdin);
@@ -121,8 +125,30 @@ int main()
 
     intercambiar(&valor1, &valor2);
 
-    printf("\n %d y %d", valor1, valor2);
+    printf("\n %d y %d", valor1, valor2);*/
 
+    printf("- Ingresa los validos del primer arreglo: ");
+    fflush(stdin);
+    scanf("%i", &validos);
+
+    int* arr1 = malloc(sizeof(int) * validos);
+    cargarArreglo(arr1, validos);
+    ordenarArreglo(arr1, validos);
+
+    printf("- Ingresa los validos del segundo arreglo: ");
+    fflush(stdin);
+    scanf("%i", &validos2);
+
+    int* arr2 = malloc(sizeof(int) * validos2);
+    cargarArreglo(arr2, validos2);
+    ordenarArreglo(arr2, validos2);
+
+    int validos3 = validos + validos2;
+
+    int arr3[validos3];
+
+    intercalar(arr1, arr2, arr3, validos3);
+    mostrarArreglo(arr3, validos3);
 }
 
 void llenarArreglo(int arreglo[],int dim)
@@ -160,14 +186,14 @@ int cargarArreglo(int arreglo[], int dim)
     while(letra == 's' && i < dim)
     {
 
-        printf("Ingresa un valor al arreglo: ");
+        printf("* Ingresa un valor al arreglo: ");
         fflush(stdin);
         scanf("%d", &num);
 
         arreglo[i] = num;
         i++;
 
-        printf("Ingresa 's' para continuar: ");
+        printf("* Ingresa 's' para continuar: ");
         fflush(stdin);
         scanf("%c", &letra);
 
@@ -452,4 +478,60 @@ void intercambiar(int *var1, int *var2)
     scanf("%d", &aux);
 
     *var2 = aux;
+}
+
+void ordenarArreglo(int arreglo[], int validos)
+{
+    int posmenor;
+    int aux;
+    int i = 0;
+    while(i < validos-1)
+    {
+        posmenor = posicionMenor(arreglo, i, validos);
+        aux = arreglo[posmenor];
+        arreglo[posmenor] = arreglo[i];
+        arreglo[i] = aux;
+        i++;
+    }
+}
+
+int posicionMenor (int arreglo[], int posIni, int validos)
+{
+
+    int menor = arreglo[posIni];
+    int posMenor = posIni;
+    int i = posIni+1;
+
+    while(i < validos)
+    {
+        if(menor > arreglo[i])
+        {
+            menor = arreglo[i];
+            posMenor = i;
+
+        }
+        i++;
+    }
+    return posMenor;
+}
+
+void intercalar (int arreglo1[], int arreglo2[], int arreglo3[], int validos)
+{
+
+    int i = 0;
+    int j = 0;
+    int u = 0;
+
+    while(u < 3)
+    {
+
+        arreglo3[u] = 1;
+        arreglo3[u+1] = 2;
+
+        i++;
+        j++;
+        u+2;
+    }
+
+    printf("AAAAAAAAAAAAA");
 }
