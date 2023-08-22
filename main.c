@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 
 //PRIMER TRABAJO FUNCIONES, LAB2//
@@ -26,7 +26,9 @@ int pasarEntero (int arreglo[], int dim);
 int mayorPre (int matriz[f][c], int mes);
 int capicua(char arreglo[], int validos);
 int posicionMenor (int arreglo[], int posIni, int validos);
+int cargarArregloParalelo(char apellido[10][30], int edades[], int dim);
 float promedioArreglo(int arreglo[], int dim);
+void mostrarArregloParalelo(char apellido[10][30], int edad[], int i);
 
 int main()
 {
@@ -36,6 +38,8 @@ int main()
     int arregloEntero[5];
     int matriz[f][c];
     char arregloC[5];
+    char apellido[10][30];
+    int edad[10];
 
     int validos;
     int validos2;
@@ -127,7 +131,7 @@ int main()
 
     printf("\n %d y %d", valor1, valor2);*/
 
-    printf("- Ingresa los validos del primer arreglo: ");
+    /*printf("- Ingresa los validos del primer arreglo: ");
     fflush(stdin);
     scanf("%i", &validos);
 
@@ -148,7 +152,11 @@ int main()
     int arr3[validos3];
 
     intercalar(arr1, arr2, arr3, validos3);
-    mostrarArreglo(arr3, validos3);
+    mostrarArreglo(arr3, validos3);*/
+
+    cargarArregloParalelo(apellido, edad, 10);
+    mostrarArregloParalelo(apellido, edad, 0);
+
 }
 
 void llenarArreglo(int arreglo[],int dim)
@@ -535,3 +543,45 @@ void intercalar (int arreglo1[], int arreglo2[], int arreglo3[], int validos)
 
     printf("AAAAAAAAAAAAA");
 }
+
+int cargarArregloParalelo(char apellido[10][30], int edades[], int dim)
+{
+
+    int i = 0;
+    int j = 0;
+    int edad;
+    char apell;
+    char letra = 's';
+
+    while(i < dim && letra == 's')
+    {
+
+    printf("Ingresa el apellido: ");
+    fflush(stdin);
+    gets(apellido[i]);
+
+    printf("Ingresa la edad: ");
+    fflush(stdin);
+    scanf("%i", &edades[i]);
+
+    printf("Ingrese 's' para continuar: ");
+    fflush(stdin);
+    scanf("%c", &letra);
+
+    i++;
+
+    }
+
+    return i;
+}
+
+void mostrarArregloParalelo(char apellido[10][30], int edad[], int i)
+{
+
+    printf("=================\n\n");
+    printf("Apellido: %s\n", apellido[i]);
+    printf("Edad: %d\n\n", edad[i]);
+    printf("=================");
+}
+
+void encontrarMayor (int apellido[10][30], int edad)
