@@ -131,7 +131,7 @@ int main()
 
     printf("\n %d y %d", valor1, valor2);*/
 
-    /*printf("- Ingresa los validos del primer arreglo: ");
+    printf("- Ingresa los validos del primer arreglo: ");
     fflush(stdin);
     scanf("%i", &validos);
 
@@ -152,10 +152,10 @@ int main()
     int arr3[validos3];
 
     intercalar(arr1, arr2, arr3, validos3);
-    mostrarArreglo(arr3, validos3);*/
+    mostrarArreglo(arr3, validos3);
 
-    cargarArregloParalelo(apellido, edad, 10);
-    mostrarArregloParalelo(apellido, edad, 0);
+   /* cargarArregloParalelo(apellido, edad, 10);
+    mostrarArregloParalelo(apellido, edad, 0);*/
 
 }
 
@@ -529,19 +529,23 @@ void intercalar (int arreglo1[], int arreglo2[], int arreglo3[], int validos)
     int i = 0;
     int j = 0;
     int u = 0;
+    int flag = 0;
 
-    while(u < 3)
+    while(i < validos)
     {
-
-        arreglo3[u] = 1;
-        arreglo3[u+1] = 2;
-
-        i++;
-        j++;
-        u+2;
+        if(flag == 0){
+            arreglo3[i] = arreglo1[u];
+            flag = 1;
+            u++;
+            i++;
+        }
+        else{
+            arreglo3[i] = arreglo2[j];
+            flag = 0;
+            i++;
+            j++;
+        }
     }
-
-    printf("AAAAAAAAAAAAA");
 }
 
 int cargarArregloParalelo(char apellido[10][30], int edades[], int dim)
@@ -584,4 +588,3 @@ void mostrarArregloParalelo(char apellido[10][30], int edad[], int i)
     printf("=================");
 }
 
-void encontrarMayor (int apellido[10][30], int edad)
